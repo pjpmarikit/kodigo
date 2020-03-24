@@ -23,13 +23,28 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'));
 app.use(express.static('files'));
 
-app.get('/', function (req, res) {    
+app.get('/', function (req, res) {
     res.render('home', {layout: false});
 });
 
-app.post('/save', (req, res) => { 
-    MongoClient.connect(MongoDB['url'], (err, client) => {                    
-        const db = client.db(MongoDB['database']);            
+app.get('/:key', function (req, res) {
+    MongoClient.connect(MongoDB['url'], (err, client) => {
+        const db = client.db(MongoDB['database']);
+        const key = req.params.key;
+        db.collection(MongoDB['collection']).findOne({key}).then((obj) =>{
+            client.close();
+            console.log(`[SUCCESS] ${obj} snippet found.`);
+            res.render('home', {layout: false, ...obj});
+        }).catch((error) => {
+            console.log(`[ERROR] Finding snippet. ${error}`);
+            res.send(false);
+        });
+    });
+});
+
+app.post('/save', (req, res) => {
+    MongoClient.connect(MongoDB['url'], (err, client) => {
+        const db = client.db(MongoDB['database']);
         const key = `${randomstring.generate(5)}.${req.body['language']}`;
 
         db.collection(MongoDB['collection']).insertOne({key, code: req.body['code']}).then((result) =>{

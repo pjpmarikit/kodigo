@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">    
-    <title>Kodigo</title>
+    <title>Kodigo{{#if key}} - {{ key }}{{/if}}</title>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
     <link type="text/css" rel="stylesheet" href="/css/highlight.min.css">
     
@@ -11,7 +11,7 @@
     <div class="header">KODIGO v1.0<span class="hotkeys">Ctrl^S [SAVE] • Ctrl^N [NEW] • Ctrl^E [EDIT]</span></div>
 
     <div id="content">
-        <textarea id="edit" spellcheck="false"></textarea>
+        <textarea id="edit" spellcheck="false">{{ code }}</textarea>
         <div id="preview" class="hidden"><pre></pre></div>
     </div>
 </body>
