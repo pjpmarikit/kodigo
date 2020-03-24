@@ -1,0 +1,66 @@
+body {
+    background-color:#F0F0F0;
+    margin: 0;
+}
+
+div.header {
+    background-color: #dedede;
+    color: black;
+    padding: 2px;  
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */    
+    font-family: monospace;
+    white-space: pre;
+}
+
+div.header .hotkeys {
+    float: right;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+    background-color:#F0F0F0;
+    padding: 2px 0 0 0;
+
+    line-height: 1.23 !important;
+    border: none;
+    outline: none;
+    height: 100% !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#content { 
+    background: url(../img/line-numbers.png) !important;
+    background-attachment: local !important;
+    background-repeat: no-repeat !important;
+    padding-left: 35px !important;
+    padding-top: 10px !important;
+    height: 100%
+}
+
+#preview {
+    padding: 2px 0 0 0;
+}
+
+#preview pre {
+    margin: 0 !important;
+    padding: 0;
+    line-height: 1.23 !important;
+    font-size: 13.33px;
+}
+
+textarea {
+    caret-color: red;
+    caret-color: #ff0000;
+    caret-color: rgb(255, 0, 0);
+    caret-color: hsl(0, 97%, 50%);
+}
+
+.hidden {
+    display: none !important;
+}
