@@ -23,11 +23,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             if (pressedKey === sCode){
                 document.getElementById('preview').classList.remove('hidden');
                 document.getElementById('edit').classList.add('hidden');
-
                 document.getElementById('preview').innerHTML = `<pre>${document.getElementById('edit').value}</pre>`;                
+
                 hljs.highlightBlock(document.getElementById('preview')); // See https://highlightjs.org/
+
                 var language = hljs.highlightAuto(document.getElementById('edit').value).language;                
-                console.log(language);
+                saveSnippet(language, document.getElementById('edit').value)
                 e.preventDefault();
             } else if(pressedKey === eCode) {
                 document.getElementById('preview').classList.add('hidden');
@@ -38,4 +39,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else
             previousKey = pressedKey;    
     }; 
+
+    function saveSnippet(language, code) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if(this.responseText != 'false') {
+                    window.history.pushState("object or string", "Page Title", `/${this.responseText}`);
+                }                
+            }
+        };
+        xhttp.open("POST", "/save", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify({language, code}));
+    };
 });
