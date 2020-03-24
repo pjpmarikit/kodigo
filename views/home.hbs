@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">    
+    <meta charset="utf-8">
     <title>Kodigo{{#if key}} - {{ key }}{{/if}}</title>
     <link type="text/css" rel="stylesheet" href="/css/style.css"/>
     <link type="text/css" rel="stylesheet" href="/css/highlight.min.css">
-    
+
 </head>
 <body>
     <div class="header">KODIGO v1.0<span class="hotkeys">Ctrl^S [SAVE] • Ctrl^N [NEW] • Ctrl^E [EDIT]</span></div>
 
     <div id="content">
-        <textarea id="edit" spellcheck="false">{{ code }}</textarea>
-        <div id="preview" class="hidden"><pre></pre></div>
+        <textarea id="edit" spellcheck="false" {{#if code }}class="hidden"{{/if}}></textarea>
+        <div id="preview" {{#if code }}{{ else }}class="hidden"{{/if}}>{{#if code }}<pre><code>{{ code }}</code></pre>{{/if}}</div>
     </div>
 </body>
 <script src="/js/highlight.min.js"></script>
